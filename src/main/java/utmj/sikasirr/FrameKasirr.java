@@ -4,6 +4,11 @@
  */
 package utmj.sikasirr;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -12,6 +17,8 @@ import javax.swing.JOptionPane;
 public class FrameKasirr extends javax.swing.JFrame {
     
     private Transaksi transaksi = new Transaksi();
+    private List<String> riwayatTransaksi = new ArrayList<>();
+    private boolean sudahDibayar = false;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameKasirr.class.getName());
 
     /**
@@ -19,6 +26,70 @@ public class FrameKasirr extends javax.swing.JFrame {
      */
     public FrameKasirr() {
         initComponents();
+        
+        // ==================================
+    // SHORTCUT MENU UTAMA (MNEMONIC)
+    // ==================================
+
+    menuFile.setMnemonic(KeyEvent.VK_F);
+    menuTransaksi.setMnemonic(KeyEvent.VK_T);
+    menuLaporan.setMnemonic(KeyEvent.VK_L);
+    menuBantuan.setMnemonic(KeyEvent.VK_B);
+
+
+    // ==================================
+    // SHORTCUT ITEM MENU FILE
+    // ==================================
+
+    itemTransaksiBaru.setAccelerator(
+        KeyStroke.getKeyStroke(
+            KeyEvent.VK_N,
+            InputEvent.CTRL_DOWN_MASK
+        )
+    );
+
+    itemKeluar.setAccelerator(
+        KeyStroke.getKeyStroke(
+            KeyEvent.VK_Q,
+            InputEvent.CTRL_DOWN_MASK
+        )
+    );
+
+
+    // ==================================
+    // SHORTCUT ITEM MENU TRANSAKSI
+    // ==================================
+
+    itemLihatRiwayat.setAccelerator(
+        KeyStroke.getKeyStroke(
+            KeyEvent.VK_H,
+            InputEvent.CTRL_DOWN_MASK
+        )
+    );
+
+
+    // ==================================
+    // SHORTCUT ITEM MENU LAPORAN
+    // ==================================
+
+    itemHapusItem.setAccelerator(
+        KeyStroke.getKeyStroke(
+            KeyEvent.VK_DELETE,
+            InputEvent.CTRL_DOWN_MASK
+        )
+    );
+
+
+    // ==================================
+    // SHORTCUT ITEM MENU BANTUAN
+    // ==================================
+
+    itemTentangAplikasi.setAccelerator(
+        KeyStroke.getKeyStroke(
+            KeyEvent.VK_F1,
+            0
+        )
+    );
     }
 
     /**
@@ -49,6 +120,7 @@ public class FrameKasirr extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         itemTransaksiBaru = new javax.swing.JMenuItem();
+        pemisahFile1 = new javax.swing.JPopupMenu.Separator();
         itemKeluar = new javax.swing.JMenuItem();
         menuTransaksi = new javax.swing.JMenu();
         itemLihatRiwayat = new javax.swing.JMenuItem();
@@ -72,14 +144,14 @@ public class FrameKasirr extends javax.swing.JFrame {
 
         labelTotal.setText("Total");
 
-        txtTotal.setBackground(new java.awt.Color(0, 0, 255));
+        txtTotal.setBackground(new java.awt.Color(204, 255, 255));
         txtTotal.addActionListener(this::txtTotalActionPerformed);
 
-        btnHitung.setBackground(new java.awt.Color(0, 0, 255));
-        btnHitung.setForeground(new java.awt.Color(255, 255, 255));
+        btnHitung.setBackground(new java.awt.Color(204, 255, 255));
         btnHitung.setText("Hitung Total");
         btnHitung.addActionListener(this::btnHitungActionPerformed);
 
+        btnReset.setBackground(new java.awt.Color(204, 255, 204));
         btnReset.setText("Reset");
         btnReset.addActionListener(this::btnResetActionPerformed);
 
@@ -87,8 +159,7 @@ public class FrameKasirr extends javax.swing.JFrame {
 
         labelKembali.setText("Uang Kembali");
 
-        btnBayar.setBackground(new java.awt.Color(255, 0, 0));
-        btnBayar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBayar.setBackground(new java.awt.Color(255, 204, 204));
         btnBayar.setText("Bayar");
         btnBayar.addActionListener(this::btnBayarActionPerformed);
 
@@ -97,34 +168,38 @@ public class FrameKasirr extends javax.swing.JFrame {
         panelKasirLayout.setHorizontalGroup(
             panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelKasirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelKembali, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelJumlah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelHarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtBayar)
+                .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelKasirLayout.createSequentialGroup()
-                        .addComponent(btnReset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBayar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHitung))
-                    .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtJumlah)
-                    .addComponent(txtHarga)
-                    .addComponent(txtNama)
-                    .addComponent(txtKembali))
+                        .addContainerGap()
+                        .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelKembali, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelJumlah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelHarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtBayar, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtJumlah)
+                            .addComponent(txtHarga)
+                            .addComponent(txtNama)
+                            .addComponent(txtKembali)))
+                    .addGroup(panelKasirLayout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelKasirLayout.createSequentialGroup()
+                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnHitung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelKasirLayout.setVerticalGroup(
             panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelKasirLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelBarang, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,7 +215,9 @@ public class FrameKasirr extends javax.swing.JFrame {
                 .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelTotal, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(btnHitung)
+                .addGap(17, 17, 17)
                 .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelBayar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtBayar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -148,10 +225,9 @@ public class FrameKasirr extends javax.swing.JFrame {
                 .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelKembali, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtKembali, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                .addGap(18, 18, 18)
                 .addGroup(panelKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
-                    .addComponent(btnHitung)
                     .addComponent(btnBayar))
                 .addContainerGap())
         );
@@ -163,6 +239,7 @@ public class FrameKasirr extends javax.swing.JFrame {
         itemTransaksiBaru.setText("Transksi Baru");
         itemTransaksiBaru.addActionListener(this::itemTransaksiBaruActionPerformed);
         menuFile.add(itemTransaksiBaru);
+        menuFile.add(pemisahFile1);
 
         itemKeluar.setMnemonic('K');
         itemKeluar.setText("Keluar");
@@ -174,6 +251,7 @@ public class FrameKasirr extends javax.swing.JFrame {
         menuTransaksi.setText("Transaksi");
 
         itemLihatRiwayat.setText("Lihat Riwayat");
+        itemLihatRiwayat.addActionListener(this::itemLihatRiwayatActionPerformed);
         menuTransaksi.add(itemLihatRiwayat);
 
         menuBar.add(menuTransaksi);
@@ -251,43 +329,112 @@ public class FrameKasirr extends javax.swing.JFrame {
 
     private void itemTransaksiBaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTransaksiBaruActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Transaksi berhasil disimpan");
-        
-        int pilihan = JOptionPane.showConfirmDialog(this, "Yakin ingin keluar?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        int pilihan = JOptionPane.showConfirmDialog(
+            this,
+            "Mulai transaksi baru?",
+            "Konfirmasi Transaksi",
+            JOptionPane.YES_NO_OPTION);
+
         if (pilihan == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        } else {
-            transaksi.resetTransaksi();
-            txtNama.setText("");
-            txtJumlah.setText("");
-            txtHarga.setText("");
-            txtTotal.setText("");
-            txtBayar.setText("");
-            txtKembali.setText("");
-            txtNama.requestFocus();
+
+            resetForm();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Silakan masukkan data transaksi baru.");
         }
     }//GEN-LAST:event_itemTransaksiBaruActionPerformed
 
     private void itemHapusItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemHapusItemActionPerformed
         // TODO add your handling code here:
-        int pilihan = JOptionPane.showConfirmDialog(
-        this, 
-        "Apakah Anda yakin ingin menghapus item terakhir?", 
-        "Konfirmasi Hapus", 
-        JOptionPane.YES_NO_OPTION
-    );
-        if (pilihan == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, "Tidak ada item untuk dihapus.");
+        if (riwayatTransaksi.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Belum ada riwayat yang dapat dihapus.");
+        return;
+    }
+
+    int pilihan = JOptionPane.showConfirmDialog(
+            this,
+            "Yakin ingin menghapus riwayat terakhir?",
+            "Konfirmasi Hapus",
+            JOptionPane.YES_NO_OPTION);
+
+    if (pilihan == JOptionPane.YES_OPTION) {
+
+        riwayatTransaksi.remove(
+                riwayatTransaksi.size() - 1);
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Riwayat transaksi terakhir berhasil dihapus.");
         }
     }//GEN-LAST:event_itemHapusItemActionPerformed
 
     private void itemTentangAplikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTentangAplikasiActionPerformed
         // TODO add your handling code here:
-        String info = "Nama Aplikasi: SiKasir\n"
-                     + "Versi: 1.0.0\n"
-                     + "Pengembang: Asyraf Abdullah";
+        String info = "Nama Aplikasi : SiKasir\n"
+                + "Versi : 1.0.0\n"
+                + "Pengembang : Asyraf Abdullah\n"
+                + "Fungsi : Aplikasi Kasir Sederhana";
+
+        JOptionPane.showMessageDialog(
+                this,
+                info,
+                "Tentang Aplikasi",
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_itemTentangAplikasiActionPerformed
 
+    private void itemLihatRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLihatRiwayatActionPerformed
+        // TODO add your handling code here:
+        if (riwayatTransaksi.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Belum ada riwayat transaksi.",
+                "Riwayat Transaksi",
+                JOptionPane.INFORMATION_MESSAGE);
+
+    } else {
+
+        StringBuilder riwayat = new StringBuilder();
+
+        riwayat.append("===== RIWAYAT TRANSAKSI =====\n\n");
+
+        for (int i = 0; i < riwayatTransaksi.size(); i++) {
+
+            riwayat.append(i + 1)
+                   .append(". ")
+                   .append(riwayatTransaksi.get(i))
+                   .append("\n\n");
+        }
+
+        JOptionPane.showMessageDialog(
+                this,
+                riwayat.toString(),
+                "Riwayat Transaksi",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_itemLihatRiwayatActionPerformed
+    
+    private void resetForm() {
+
+        transaksi.resetTransaksi();
+
+        txtNama.setText("");
+        txtHarga.setText("");
+        txtJumlah.setText("");
+        txtTotal.setText("");
+        txtBayar.setText("");
+        txtKembali.setText("");
+
+        sudahDibayar = false;
+
+        txtNama.requestFocus();
+    }
+    
+    
     private void hitungTotal() {
         try {
             int harga = Integer.parseInt(txtHarga.getText());
@@ -320,47 +467,92 @@ public class FrameKasirr extends javax.swing.JFrame {
     }
 
     
-    private void Bayar() {  
+    private void Bayar() {
+
         try {
-            if (txtBayar.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, 
-                        "Kolom Uang Bayar ini juga wajib diisi dong neng!", 
-                        "Peringatan", 
+
+            if (txtNama.getText().trim().isEmpty()
+                    || txtHarga.getText().trim().isEmpty()
+                    || txtJumlah.getText().trim().isEmpty()
+                    || txtBayar.getText().trim().isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Semua kolom harus diisi!",
+                        "Peringatan",
                         JOptionPane.WARNING_MESSAGE);
-                txtBayar.requestFocus();
+
                 return;
             }
-            
-            int bayar = Integer.parseInt(txtBayar.getText());
+
+            if (sudahDibayar) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Transaksi ini sudah dibayar. "
+                        + "Silakan mulai transaksi baru.");
+                return;
+            }
+
             int harga = Integer.parseInt(txtHarga.getText());
             int jumlah = Integer.parseInt(txtJumlah.getText());
-            int total = harga * jumlah;
-            
-            // Validasi Pembayaran
-            if (bayar < total) {
-                JOptionPane.showMessageDialog(this, 
-                        "Uang Pembayaran Kurang!\nTotal belanja: Rp " + total + 
-                        "\nUang dibayar: Rp " + bayar + 
-                        "\nKekurangan Rp " + (total - bayar), 
-                        "Pembayaran Gagal", 
-                        JOptionPane.WARNING_MESSAGE);
-            return;
+            int bayar = Integer.parseInt(txtBayar.getText());
+
+            if (harga <= 0 || jumlah <= 0 || bayar < 0) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Masukkan angka yang valid!");
+                return;
             }
-            
-            // Menghitung Kembalian
+
+            int total = harga * jumlah;
+
+            if (bayar < total) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Uang pembayaran kurang!\n"
+                        + "Total: Rp " + total + "\n"
+                        + "Dibayar: Rp " + bayar + "\n"
+                        + "Kekurangan: Rp " + (total - bayar),
+                        "Pembayaran Gagal",
+                        JOptionPane.WARNING_MESSAGE);
+
+                return;
+            }
+
             int kembali = bayar - total;
-            txtKembali.setText(Integer.toString(kembali));
-            
-            JOptionPane.showMessageDialog(this, 
-                    "Pembayaran berhasil!\nKembalian: Rp " + kembali, 
-                    "Pembayaran berhasil", 
+
+            txtTotal.setText(String.valueOf(total));
+            txtKembali.setText(String.valueOf(kembali));
+
+            // Menyimpan transaksi ke dalam riwayat
+            String data = "Barang: " + txtNama.getText()
+                        + "\nHarga: Rp " + harga
+                        + "\nJumlah: " + jumlah
+                        + "\nTotal: Rp " + total
+                        + "\nBayar: Rp " + bayar
+                        + "\nKembalian: Rp " + kembali;
+
+            riwayatTransaksi.add(data);
+
+            sudahDibayar = true;
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Pembayaran berhasil!\n"
+                    + "Total: Rp " + total + "\n"
+                    + "Kembalian: Rp " + kembali,
+                    "Pembayaran Berhasil",
                     JOptionPane.INFORMATION_MESSAGE);
-                    
+
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, 
-                    "Masukkan angka yang valid ya!", "Peringatan", 
-                    JOptionPane.WARNING_MESSAGE);
-        } 
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Harga, jumlah, dan uang bayar harus berupa angka!",
+                    "Kesalahan Input",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
     /**
      * @param args the command line arguments
@@ -408,6 +600,7 @@ public class FrameKasirr extends javax.swing.JFrame {
     private javax.swing.JMenu menuLaporan;
     private javax.swing.JMenu menuTransaksi;
     private javax.swing.JPanel panelKasir;
+    private javax.swing.JPopupMenu.Separator pemisahFile1;
     private javax.swing.JTextField txtBayar;
     private javax.swing.JTextField txtHarga;
     private javax.swing.JTextField txtJumlah;

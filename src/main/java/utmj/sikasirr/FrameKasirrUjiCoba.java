@@ -9,16 +9,16 @@ import javax.swing.JOptionPane;
  *
  * @author MartsaRF
  */
-public class FrameKasirr1 extends javax.swing.JFrame {
+public class FrameKasirrUjiCoba extends javax.swing.JFrame {
     
     int harga, total, jumlah;
     private Transaksi transaksi = new Transaksi();
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameKasirr1.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameKasirrUjiCoba.class.getName());
     
     /**
      * Creates new form FrameKasirr
      */
-    public FrameKasirr1() {
+    public FrameKasirrUjiCoba() {
         initComponents();
     }
 
@@ -273,7 +273,7 @@ public class FrameKasirr1 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrameKasirr1().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrameKasirrUjiCoba().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

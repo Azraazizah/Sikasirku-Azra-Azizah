@@ -19,6 +19,8 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemTransaksiBaruActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="pemisahFile1">
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemKeluar">
               <Properties>
                 <Property name="mnemonic" type="int" value="75"/>
@@ -39,6 +41,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lihat Riwayat"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemLihatRiwayatActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -121,30 +126,38 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="labelKembali" max="32767" attributes="0"/>
-                      <Component id="labelBarang" alignment="0" max="32767" attributes="0"/>
-                      <Component id="labelBayar" alignment="0" max="32767" attributes="0"/>
-                      <Component id="labelTotal" alignment="0" max="32767" attributes="0"/>
-                      <Component id="labelJumlah" alignment="0" max="32767" attributes="0"/>
-                      <Component id="labelHarga" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="56" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtBayar" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="btnReset" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnBayar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnHitung" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="labelKembali" max="32767" attributes="0"/>
+                              <Component id="labelBarang" alignment="0" max="32767" attributes="0"/>
+                              <Component id="labelBayar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="labelTotal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="labelJumlah" alignment="0" max="32767" attributes="0"/>
+                              <Component id="labelHarga" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="56" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtBayar" pref="254" max="32767" attributes="0"/>
+                              <Component id="txtTotal" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtJumlah" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtHarga" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNama" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtKembali" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="txtTotal" alignment="1" max="32767" attributes="0"/>
-                      <Component id="txtJumlah" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtHarga" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtNama" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtKembali" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="btnReset" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnBayar" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="btnHitung" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -153,7 +166,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="labelBarang" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNama" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -173,7 +186,9 @@
                       <Component id="labelTotal" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTotal" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnHitung" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="labelBayar" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="txtBayar" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -183,10 +198,9 @@
                       <Component id="labelKembali" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="txtKembali" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnReset" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnHitung" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBayar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -227,7 +241,7 @@
         <Component class="javax.swing.JTextField" name="txtTotal">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="0" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -237,10 +251,7 @@
         <Component class="javax.swing.JButton" name="btnHitung">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Hitung Total"/>
           </Properties>
@@ -250,6 +261,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnReset">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reset"/>
           </Properties>
           <Events>
@@ -273,10 +287,7 @@
         <Component class="javax.swing.JButton" name="btnBayar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="ff" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="cc" green="cc" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Bayar"/>
           </Properties>

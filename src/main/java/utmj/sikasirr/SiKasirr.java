@@ -19,10 +19,7 @@ public class SiKasirr extends JFrame {
         getContentPane().setBackground(new Color(27, 99, 235));
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        
-
-        
+        setLocationRelativeTo(null);        
     }
 
     public static void main(String[] args) {
