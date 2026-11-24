@@ -12,7 +12,7 @@ import javax.swing.KeyStroke;
 
 /**
  *
- * @author MartsaRF
+ * @author AzraAzizah
  */
 public class FrameKasirr extends javax.swing.JFrame {
     
@@ -27,69 +27,69 @@ public class FrameKasirr extends javax.swing.JFrame {
     public FrameKasirr() {
         initComponents();
         
+            // ==================================
+        // SHORTCUT MENU UTAMA (MNEMONIC)
         // ==================================
-    // SHORTCUT MENU UTAMA (MNEMONIC)
-    // ==================================
 
-    menuFile.setMnemonic(KeyEvent.VK_F);
-    menuTransaksi.setMnemonic(KeyEvent.VK_T);
-    menuLaporan.setMnemonic(KeyEvent.VK_L);
-    menuBantuan.setMnemonic(KeyEvent.VK_B);
+        menuFile.setMnemonic(KeyEvent.VK_F);
+        menuTransaksi.setMnemonic(KeyEvent.VK_T);
+        menuLaporan.setMnemonic(KeyEvent.VK_L);
+        menuBantuan.setMnemonic(KeyEvent.VK_B);
 
 
-    // ==================================
-    // SHORTCUT ITEM MENU FILE
-    // ==================================
+        // ==================================
+        // SHORTCUT ITEM MENU FILE
+        // ==================================
 
-    itemTransaksiBaru.setAccelerator(
-        KeyStroke.getKeyStroke(
-            KeyEvent.VK_N,
-            InputEvent.CTRL_DOWN_MASK
-        )
-    );
+        itemTransaksiBaru.setAccelerator(
+            KeyStroke.getKeyStroke(
+                KeyEvent.VK_N,
+                InputEvent.CTRL_DOWN_MASK
+            )
+        );
 
-    itemKeluar.setAccelerator(
-        KeyStroke.getKeyStroke(
-            KeyEvent.VK_Q,
-            InputEvent.CTRL_DOWN_MASK
-        )
-    );
-
-
-    // ==================================
-    // SHORTCUT ITEM MENU TRANSAKSI
-    // ==================================
-
-    itemLihatRiwayat.setAccelerator(
-        KeyStroke.getKeyStroke(
-            KeyEvent.VK_H,
-            InputEvent.CTRL_DOWN_MASK
-        )
-    );
+        itemKeluar.setAccelerator(
+            KeyStroke.getKeyStroke(
+                KeyEvent.VK_Q,
+                InputEvent.CTRL_DOWN_MASK
+            )
+        );
 
 
-    // ==================================
-    // SHORTCUT ITEM MENU LAPORAN
-    // ==================================
+        // ==================================
+        // SHORTCUT ITEM MENU TRANSAKSI
+        // ==================================
 
-    itemHapusItem.setAccelerator(
-        KeyStroke.getKeyStroke(
-            KeyEvent.VK_DELETE,
-            InputEvent.CTRL_DOWN_MASK
-        )
-    );
+        itemLihatRiwayat.setAccelerator(
+            KeyStroke.getKeyStroke(
+                KeyEvent.VK_H,
+                InputEvent.CTRL_DOWN_MASK
+            )
+        );
 
 
-    // ==================================
-    // SHORTCUT ITEM MENU BANTUAN
-    // ==================================
+        // ==================================
+        // SHORTCUT ITEM MENU LAPORAN
+        // ==================================
 
-    itemTentangAplikasi.setAccelerator(
-        KeyStroke.getKeyStroke(
-            KeyEvent.VK_F1,
-            0
-        )
-    );
+        itemHapusItem.setAccelerator(
+            KeyStroke.getKeyStroke(
+                KeyEvent.VK_DELETE,
+                InputEvent.CTRL_DOWN_MASK
+            )
+        );
+
+
+        // ==================================
+        // SHORTCUT ITEM MENU BANTUAN
+        // ==================================
+
+        itemTentangAplikasi.setAccelerator(
+            KeyStroke.getKeyStroke(
+                KeyEvent.VK_F1,
+                0
+            )
+        );
     }
 
     /**
@@ -144,14 +144,14 @@ public class FrameKasirr extends javax.swing.JFrame {
 
         labelTotal.setText("Total");
 
-        txtTotal.setBackground(new java.awt.Color(204, 255, 255));
+        txtTotal.setBackground(new java.awt.Color(255, 153, 153));
         txtTotal.addActionListener(this::txtTotalActionPerformed);
 
-        btnHitung.setBackground(new java.awt.Color(204, 255, 255));
+        btnHitung.setBackground(new java.awt.Color(255, 153, 153));
         btnHitung.setText("Hitung Total");
         btnHitung.addActionListener(this::btnHitungActionPerformed);
 
-        btnReset.setBackground(new java.awt.Color(204, 255, 204));
+        btnReset.setBackground(new java.awt.Color(51, 153, 255));
         btnReset.setText("Reset");
         btnReset.addActionListener(this::btnResetActionPerformed);
 
@@ -159,7 +159,7 @@ public class FrameKasirr extends javax.swing.JFrame {
 
         labelKembali.setText("Uang Kembali");
 
-        btnBayar.setBackground(new java.awt.Color(255, 204, 204));
+        btnBayar.setBackground(new java.awt.Color(51, 204, 255));
         btnBayar.setText("Bayar");
         btnBayar.addActionListener(this::btnBayarActionPerformed);
 
@@ -248,7 +248,7 @@ public class FrameKasirr extends javax.swing.JFrame {
 
         menuBar.add(menuFile);
 
-        menuTransaksi.setText("Transaksi");
+        menuTransaksi.setText("Transaction");
 
         itemLihatRiwayat.setText("Lihat Riwayat");
         itemLihatRiwayat.addActionListener(this::itemLihatRiwayatActionPerformed);
@@ -256,7 +256,7 @@ public class FrameKasirr extends javax.swing.JFrame {
 
         menuBar.add(menuTransaksi);
 
-        menuLaporan.setText("Laporan");
+        menuLaporan.setText("Report");
 
         itemHapusItem.setText("Hapus Item Terakhir");
         itemHapusItem.addActionListener(this::itemHapusItemActionPerformed);
@@ -264,7 +264,7 @@ public class FrameKasirr extends javax.swing.JFrame {
 
         menuBar.add(menuLaporan);
 
-        menuBantuan.setText("Bantuan");
+        menuBantuan.setText("Help");
 
         itemTentangAplikasi.setText("Tentang Aplikasi");
         itemTentangAplikasi.addActionListener(this::itemTentangAplikasiActionPerformed);
@@ -295,10 +295,6 @@ public class FrameKasirr extends javax.swing.JFrame {
     private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
         // TODO add your handling code here:
         hitungTotal();
-//        int harga = Integer.parseInt(txtHarga.getText());
-//        int jumlah = Integer.parseInt(txtJumlah.getText());
-//        int total = (harga * jumlah);
-//        txtTotal.setText(Integer.toString(total));
     }//GEN-LAST:event_btnHitungActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -376,8 +372,8 @@ public class FrameKasirr extends javax.swing.JFrame {
         // TODO add your handling code here:
         String info = "Nama Aplikasi : SiKasir\n"
                 + "Versi : 1.0.0\n"
-                + "Pengembang : Asyraf Abdullah\n"
-                + "Fungsi : Aplikasi Kasir Sederhana";
+                + "Pengembang : Azra Azizah\n"
+                + "Fungsi : Aplikasi Kasir Toko";
 
         JOptionPane.showMessageDialog(
                 this,

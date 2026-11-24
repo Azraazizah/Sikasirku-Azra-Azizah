@@ -6,7 +6,7 @@ package utmj.sikasirr;
 
 /**
  *
- * @author MartsaRF
+ * @author AzraAzizah
  */
 public class Barang {
     private String nama;   // atribut
@@ -20,7 +20,6 @@ public class Barang {
     public Barang(String nama, double harga) {
         this.nama = nama;
         this.harga = harga;
-        //Barang b1 = new Barang("Buku Tulis", 5000);
     }
     
     public String getNama() {

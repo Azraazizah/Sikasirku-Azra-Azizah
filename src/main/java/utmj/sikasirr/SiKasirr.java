@@ -6,17 +6,17 @@ package utmj.sikasirr;
 
 /**
  *
- * @author MartsaRF
+ * @author AzraAzizah
  */
 import javax.swing.JFrame;
 import java.awt.Color;
 
 public class SiKasirr extends JFrame {
     public SiKasirr() {
-        setTitle("“SiKasir” — Aplikasi Kasir Toko Sederhana");
+        setTitle("“SiKasir” — Aplikasi Kasir Toko");
         setSize(420, 320);
         //        Mengatur Warna Background
-        getContentPane().setBackground(new Color(27, 99, 235));
+        getContentPane().setBackground(new Color(125, 192, 235));
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);        
